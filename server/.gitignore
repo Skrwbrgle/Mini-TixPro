@@ -4,3 +4,4 @@ node_modules/
 Ignoring Files
 package-lock.json
 .env
+config/config.json
