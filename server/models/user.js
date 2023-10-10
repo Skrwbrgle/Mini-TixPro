@@ -9,6 +9,8 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
+      user.hasMany(models.payment);
+      user.belongsToMany(models.event, { through: models.booking });
     }
   }
   user.init(
@@ -28,6 +30,12 @@ module.exports = (sequelize, DataTypes) => {
       image: DataTypes.STRING,
     },
     {
+      hooks: {
+        beforeCreate: (user, options) => {
+          user.image =
+            "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_640.png";
+        },
+      },
       sequelize,
       modelName: "user",
     }

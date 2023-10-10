@@ -33,10 +33,10 @@ module.exports = {
         type: Sequelize.INTEGER,
       },
       gender: {
-        type: Sequelize.ENUM("male", "female"),
+        type: Sequelize.ENUM("0", "1"), //0 = male, 1 = famale
       },
       role: {
-        type: Sequelize.ENUM("admin", "user"),
+        type: Sequelize.ENUM("0", "1"), //0 = admin, 1 = user
       },
       image: {
         type: Sequelize.STRING,
