@@ -15,6 +15,9 @@ module.exports = {
       status: {
         type: Sequelize.ENUM("approved", "rejected", "pending"),
       },
+      midtransToken: {
+        type: Sequelize.STRING,
+      },
       userId: {
         type: Sequelize.INTEGER,
       },

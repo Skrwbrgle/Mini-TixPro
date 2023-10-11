@@ -10,16 +10,13 @@ class SeatController {
         const { Num_Seat, Seat_Code } = req.body;
         const number_seat = generetSeat(Num_Seat, Seat_Code);
 
-        let seats = number_seat.forEach((e) => {
+        number_seat.forEach((e) => {
           seat.create({
             numSeat: e,
             eventId: idEvent,
           });
         });
-        res.status(200).json(seats);
-        seats === 1
-          ? res.tatus(200).json({ massage: `successfully create seats` })
-          : res.status(404).json({ message: `Access denied` });
+        res.status(200).json({ message: `seat created successfully` });
       } else {
         res
           .status(403)
