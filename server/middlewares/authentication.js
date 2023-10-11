@@ -5,7 +5,7 @@ const authentication = (req, res, next) => {
 
   if (access_token) {
     try {
-      let verifyToken = tokenVerifer(access_token);
+      let verifyToken = verifyToken(access_token);
       req.userData = verifyToken;
       next();
     } catch (e) {
@@ -18,15 +18,6 @@ const authentication = (req, res, next) => {
       message: "Token not found!",
     });
   }
-};
-
-const tokenGenerator = (data) => {
-  const { username, email, password } = data;
-  return Jwt.sign({
-    username,
-    email,
-    password,
-  });
 };
 
 const isAdmin = (req, res, next) => {

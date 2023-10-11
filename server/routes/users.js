@@ -4,7 +4,7 @@ const { UserController } = require("../controllers");
 
 userRoutes.get("/", UserController.getAllUser);
 userRoutes.get("/login", UserController.login);
-userRoutes.post("/register", authentication, UserController.register);
+userRoutes.post("/register", UserController.register);
 
 userRoutes.get("/dashboard", (req, res) => {});
 

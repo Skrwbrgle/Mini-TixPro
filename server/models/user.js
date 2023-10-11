@@ -79,9 +79,9 @@ module.exports = (sequelize, DataTypes) => {
           user.image =
             user.image ||
             "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_640.png";
-          user.no_telp = user.no_telp || null;
-          user.address = user.address || null;
-          user.identification = user.identification || 0;
+          user.no_telp = user.no_telp || "";
+          user.address = user.address || "";
+          // user.identification = user.identification || 0;
           user.age = user.age || 0;
           user.gender = user.gender || "0";
           user.role = user.role || "1";
