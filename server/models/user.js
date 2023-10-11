@@ -46,16 +46,14 @@ module.exports = (sequelize, DataTypes) => {
         allowNull: true,
       },
       identification: {
-        type: DataTypes.INTEGER,
+        type: DataTypes.BIGINT,
         unique: true,
-        allowNull: false,
         notEmpty: {
           message: "identification is required!",
         },
       },
       age: {
         type: DataTypes.INTEGER,
-        allowNull: false,
         notEmpty: {
           message: "age is required!",
         },
@@ -81,7 +79,6 @@ module.exports = (sequelize, DataTypes) => {
             "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_640.png";
           user.no_telp = user.no_telp || "";
           user.address = user.address || "";
-          // user.identification = user.identification || 0;
           user.age = user.age || 0;
           user.gender = user.gender || "0";
           user.role = user.role || "1";

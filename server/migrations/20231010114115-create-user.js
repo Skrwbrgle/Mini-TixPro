@@ -28,7 +28,7 @@ module.exports = {
         type: Sequelize.STRING,
       },
       identification: {
-        type: Sequelize.INTEGER,
+        type: Sequelize.BIGINT,
         allowNull: false,
         unique: true,
       },
