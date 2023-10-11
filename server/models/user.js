@@ -25,8 +25,8 @@ module.exports = (sequelize, DataTypes) => {
         unique: true,
       },
       age: DataTypes.INTEGER,
-      gender: DataTypes.ENUM,
-      role: DataTypes.ENUM,
+      gender: DataTypes.ENUM("0", "1"),
+      role: DataTypes.ENUM("0", "1"),
       image: DataTypes.STRING,
     },
     {
