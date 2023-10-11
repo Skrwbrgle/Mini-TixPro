@@ -1,4 +1,6 @@
 const { user } = require("../models");
+const { decrypt } = require("../helpers/bcrypt");
+const { generateToken } = require("../helpers/jwt");
 
 class UserController {
   static async getAllUser(req, res) {
@@ -33,7 +35,21 @@ class UserController {
           password,
         },
       });
-      res.status(200).json(user);
+
+      if (user) {
+        if (decrypt(password, user.password)) {
+          const access_token = user.generateToken(user);
+          res.status(200).json({ access_token });
+        } else {
+          res.status(401).json({
+            message: "Wrong password!",
+          });
+        }
+      } else {
+        res.status(404).json({
+          message: "User not found!",
+        });
+      }
     } catch (err) {
       res.status(500).json(err);
     }
