@@ -17,7 +17,12 @@ module.exports = (sequelize, DataTypes) => {
   payment.init(
     {
       total_ticket: DataTypes.INTEGER,
-      status: DataTypes.STRING,
+      status: {
+        type: DataTypes.ENUM,
+        values: ["approved", "rejected", "pending"],
+        defaultValue: "pending",
+      },
+      midtransToken: DataTypes.STRING,
       userId: DataTypes.INTEGER,
       eventId: DataTypes.INTEGER,
     },
