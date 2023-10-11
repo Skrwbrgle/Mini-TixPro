@@ -8,10 +8,12 @@ routes.get("/api", (req, res) => {
 
 const userRoutes = require("./users");
 const eventRoutes = require("./events");
+const seatRoutes = require("./seats");
 const paymentRoutes = require("./payments");
 
 routes.use("/api/users", userRoutes);
 routes.use("/api/events", eventRoutes);
+routes.use("/api/seats", seatRoutes);
 routes.use("/api/payments", paymentRoutes);
 
 module.exports = routes;

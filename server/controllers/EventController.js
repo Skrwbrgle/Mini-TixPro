@@ -15,9 +15,9 @@ class EventController {
   static async getOneEvent(req, res) {
     try {
       const roleAccess = req.userData.role;
+      const idEvent = +req.params.id;
 
       if (roleAccess === "0" || roleAccess === "1") {
-        const idEvent = +req.params.id;
         //get one event with seat
         let resEvent = await event.findOne({
           where: {
@@ -53,13 +53,6 @@ class EventController {
           address,
           price,
           image,
-        });
-
-        const { numSeat, status } = req.body;
-        let seats = await seat.create({
-          numSeat,
-          status,
-          eventId: +resEvent.id,
         });
 
         res.status(200).json(resEvent);
