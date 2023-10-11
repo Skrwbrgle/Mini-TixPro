@@ -9,7 +9,12 @@ userRoutes.get("/dashboard", authentication, UserController.dashboard);
 
 //Untuk Admin
 userRoutes.get("/", authentication, UserController.getUser);
-userRoutes.delete("/delete/:id", authentication, UserController.deleteUser);
+userRoutes.delete(
+  "/delete/:id",
+  authentication,
+  UserController.deleteUserByAdmin
+);
+userRoutes.delete("/delete", authentication, UserController.deleteUserByUser);
 
 userRoutes.get("/logout", UserController.logout);
 

@@ -39,7 +39,7 @@ module.exports = {
         type: Sequelize.ENUM("0", "1"), //0 = male, 1 = famale
       },
       role: {
-        type: Sequelize.ENUM("0", "1"), //0 = admin, 1 = user
+        type: Sequelize.ENUM("0", "1"), //0 = admin, 1 = userm,
       },
       image: {
         type: Sequelize.STRING,

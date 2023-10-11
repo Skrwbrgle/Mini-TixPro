@@ -62,18 +62,24 @@ class UserController {
     try {
       const role = req.userData.role;
 
-      role === "0"
-        ? res.status(200).json({ message: `admin` })
-        : res.status(200).json({ message: `user` });
+      if (role === "0") {
+        res.status(200).json({ message: `admin` });
+      } else if (role === "1") {
+        res.status(200).json({ message: `user` });
+      } else if (role === "2") {
+        res.status(200).json({ message: `guest` });
+      }
     } catch (err) {
       res.status(500).json(err);
     }
   }
 
-  static async deleteUser(req, res) {
+  static async deleteUserByAdmin(req, res) {
     try {
       const role = req.userData.role;
       const id = +req.params.id;
+
+      const getUser = await user.findByPk(id);
 
       if (role === "0") {
         const deletedUser = await user.destroy({
@@ -81,20 +87,41 @@ class UserController {
         });
         deletedUser === 1
           ? res.status(200).json({
-              message: `User with id: ${id} deleted successfully!`,
+              message: `${getUser.username} deleted successfully!`,
             })
           : res
               .status(403)
               .json({ message: "User not found or already deleted" });
-      } else {
-        res.status(403).json({
-          message: "Access denied: Admin privilege required!",
-        });
       }
     } catch (err) {
       res.status(500).json(err);
     }
   }
+
+  static async deleteUserByUser(req, res) {
+    try {
+      const { role, id } = req.userData;
+
+      const getUser = await user.findByPk(id);
+
+      const deleteAcc = await user.destroy({
+        where: {
+          id,
+          role,
+        },
+      });
+
+      deleteAcc === 1
+        ? res
+            .status(200)
+            .json({ message: `${getUser.username} deleted successfully` })
+        : res.status(403).json({ message: `Cant not delete account` });
+    } catch (err) {
+      res.status(500).json(err);
+    }
+  }
+
+  static async update(req, res) {}
 
   static async logout(req, res) {
     const blacklistedTokens = new Set();
