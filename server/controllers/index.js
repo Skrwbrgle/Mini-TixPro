@@ -1,9 +1,9 @@
 const UserController = require("./UserController");
-const SeatController = require("./SeatController");
 const EventController = require("./EventController");
+const SeatController = require("./SeatController");
 
 module.exports = {
-  UserController,
   EventController,
   SeatController,
+  UserController,
 };
