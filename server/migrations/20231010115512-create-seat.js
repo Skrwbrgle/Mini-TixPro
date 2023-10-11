@@ -10,7 +10,7 @@ module.exports = {
         type: Sequelize.INTEGER,
       },
       numSeat: {
-        type: Sequelize.INTEGER,
+        type: Sequelize.STRING,
       },
       status: {
         type: Sequelize.BOOLEAN,
