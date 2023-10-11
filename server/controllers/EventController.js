@@ -83,7 +83,7 @@ class EventController {
         }
       );
 
-      resEdit
+      resEdit === 1
         ? res.status(200).json({
             message: `Event updated successfully`,
           })
@@ -107,7 +107,7 @@ class EventController {
         where: { eventId: idEvent },
       });
 
-      deleteEvent
+      deleteEvent === 1
         ? res.status(200).json({ message: `Event deleted successfully` })
         : res.status(404).json({ message: `Event with ${idEvent} not found` });
     } catch (e) {

@@ -1,8 +1,8 @@
 const paymentRoutes = require("express").Router();
-// const { EventController } = require("../controllers");
+const { PaymentController } = require("../controllers");
+const { authentication } = require("../middlewares/authentication");
 
-// paymentRoutes.get("/", EventController.getEvents);
-paymentRoutes.get("/:id", (req, res) => {});
+paymentRoutes.get("/", authentication, PaymentController.getPayment);
 paymentRoutes.post("/create/:id", (req, res) => {});
 paymentRoutes.put("/edit/:id", (req, res) => {});
 paymentRoutes.delete("/detele/:id", (req, res) => {});
