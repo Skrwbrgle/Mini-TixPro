@@ -3,7 +3,7 @@ const { isAdmin, authentication } = require("../middlewares/authentication");
 const { UserController } = require("../controllers");
 
 userRoutes.get("/", UserController.getAllUser);
-userRoutes.get("/login", UserController.login);
+userRoutes.post("/login", UserController.login);
 userRoutes.post("/register", UserController.register);
 
 userRoutes.get("/dashboard", (req, res) => {});
