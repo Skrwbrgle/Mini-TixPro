@@ -1,5 +1,6 @@
 "use strict";
 const { Model } = require("sequelize");
+const { options } = require("../routes/events");
 module.exports = (sequelize, DataTypes) => {
   class seat extends Model {
     /**
@@ -16,7 +17,10 @@ module.exports = (sequelize, DataTypes) => {
   seat.init(
     {
       numSeat: DataTypes.INTEGER,
-      status: DataTypes.STRING,
+      status: {
+        type: DataTypes.BOOLEAN,
+        defaultValue: false,
+      },
       eventId: DataTypes.INTEGER,
     },
     {

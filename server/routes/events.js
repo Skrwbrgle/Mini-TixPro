@@ -1,12 +1,11 @@
 const eventRoutes = require("express").Router();
 const { EventController } = require("../controllers");
-const { isAdmin } = require("../middlewares/authentication");
+const { authentication } = require("../middlewares/authentication");
 
 eventRoutes.get("/", EventController.getEvents);
-eventRoutes.get("/:id", EventController.getOneEvent);
-// eventRoutes.get("/:id", (req, res) => {});
-eventRoutes.post("/create", EventController.createEvent);
-eventRoutes.put("/edit/:id", EventController.updateEvent);
-eventRoutes.delete("/delete/:id", EventController.deleteEvent);
+eventRoutes.get("/:id", authentication, EventController.getOneEvent);
+eventRoutes.post("/create", authentication, EventController.createEvent);
+eventRoutes.put("/edit/:id", authentication, EventController.updateEvent);
+eventRoutes.delete("/delete/:id", authentication, EventController.deleteEvent);
 
 module.exports = eventRoutes;

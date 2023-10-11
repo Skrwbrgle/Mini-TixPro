@@ -14,22 +14,28 @@ class EventController {
 
   static async getOneEvent(req, res) {
     try {
-      const idEvent = +req.params.id;
-      //get one event with seat
-      let resEvent = await event.findOne({
-        where: {
-          id: +idEvent,
-        },
-        include: {
-          model: seat,
-          attributes: ["numSeat", "status"],
-          where: {
-            eventId: +idEvent,
-          },
-        },
-      });
+      const roleAccess = req.userData.role;
 
-      res.status(200).json(resEvent);
+      if (roleAccess === "0" || roleAccess === "1") {
+        const idEvent = +req.params.id;
+        //get one event with seat
+        let resEvent = await event.findOne({
+          where: {
+            id: +idEvent,
+          },
+          include: {
+            model: seat,
+            attributes: ["numSeat", "status"],
+            where: {
+              eventId: +idEvent,
+            },
+          },
+        });
+
+        res.status(200).json(resEvent);
+      } else {
+        res.status(403).json({ message: "Create Account First!" });
+      }
     } catch (e) {
       res.status(500).json(e);
     }
@@ -37,23 +43,31 @@ class EventController {
 
   static async createEvent(req, res) {
     try {
-      const { title, event_date, address, price, image } = req.body;
-      let resEvent = await event.create({
-        title,
-        event_date,
-        address,
-        price,
-        image,
-      });
+      const roleAccess = req.userData.role;
 
-      const { numSeat, status } = req.body;
-      let seats = await seat.create({
-        numSeat,
-        status,
-        eventId: +resEvent.id,
-      });
+      if (roleAccess === "0") {
+        const { title, event_date, address, price, image } = req.body;
+        let resEvent = await event.create({
+          title,
+          event_date,
+          address,
+          price,
+          image,
+        });
 
-      res.status(200).json(resEvent);
+        const { numSeat, status } = req.body;
+        let seats = await seat.create({
+          numSeat,
+          status,
+          eventId: +resEvent.id,
+        });
+
+        res.status(200).json(resEvent);
+      } else {
+        res
+          .status(403)
+          .json({ message: "Access denied: Admin privilege required!" });
+      }
     } catch (e) {
       res.status(500).json(e);
     }

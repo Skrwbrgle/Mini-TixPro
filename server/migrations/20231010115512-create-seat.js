@@ -13,7 +13,8 @@ module.exports = {
         type: Sequelize.INTEGER,
       },
       status: {
-        type: Sequelize.ENUM("approved", "rejected", "pending"),
+        type: Sequelize.BOOLEAN,
+        defaultValue: false,
       },
       eventId: {
         type: Sequelize.INTEGER,

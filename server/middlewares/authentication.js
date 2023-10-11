@@ -1,4 +1,4 @@
-const { verifyToken } = require("../helpers/jwt");
+const { verifyToken, tokenGuest } = require("../helpers/jwt");
 
 const authentication = (req, res, next) => {
   const access_token = req.headers.access_token;
@@ -15,9 +15,8 @@ const authentication = (req, res, next) => {
       });
     }
   } else {
-    res.status(404).json({
-      message: "Token not found!",
-    });
+    req.userData = { role: "2" };
+    next();
   }
 };
 
