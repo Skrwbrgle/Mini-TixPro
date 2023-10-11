@@ -1,14 +1,19 @@
-const { user } = require("../models");
+const { user, event } = require("../models");
 const { decrypt } = require("../helpers/bcrypt");
 const { generateToken } = require("../helpers/jwt");
 
 class UserController {
-  static async getAllUser(req, res) {
+  static async getUser(req, res) {
     try {
+      const role = req.userData.role;
       const users = await user.findAll();
-      res.status(200).json(users);
+      role === "0"
+        ? res.status(200).json(users)
+        : res.status(403).json({
+            message: "Access denied: Admin privilege required!",
+          });
     } catch (err) {
-      res.status(500).json(e);
+      res.status(500).json(err);
     }
   }
 
@@ -49,8 +54,7 @@ class UserController {
         });
       }
     } catch (err) {
-      // res.status(500).json(err);
-      console.log(err);
+      res.status(500).json(err);
     }
   }
 
@@ -61,8 +65,49 @@ class UserController {
       role === "0"
         ? res.status(200).json({ message: `admin` })
         : res.status(200).json({ message: `user` });
-    } catch (e) {
-      res.status(500).json(e);
+    } catch (err) {
+      res.status(500).json(err);
+    }
+  }
+
+  static async deleteUser(req, res) {
+    try {
+      const role = req.userData.role;
+      const id = +req.params.id;
+
+      if (role === "0") {
+        const deletedUser = await user.destroy({
+          where: { id },
+        });
+        deletedUser === 1
+          ? res.status(200).json({
+              message: `User with id: ${id} deleted successfully!`,
+            })
+          : res
+              .status(403)
+              .json({ message: "User not found or already deleted" });
+      } else {
+        res.status(403).json({
+          message: "Access denied: Admin privilege required!",
+        });
+      }
+    } catch (err) {
+      res.status(500).json(err);
+    }
+  }
+
+  static async logout(req, res) {
+    const blacklistedTokens = new Set();
+    try {
+      const { access_token } = req.headers;
+      if (access_token) {
+        blacklistedTokens.add(access_token);
+        res.status(200).json({ message: "Logged out successfully" });
+      } else {
+        res.status(401).json({ message: "No token provided" });
+      }
+    } catch (err) {
+      res.status(500).json(err);
     }
   }
 }
