@@ -3,21 +3,33 @@ const { event, seat, booking, payment } = require("../models");
 class EventController {
   static async getEvents(req, res) {
     try {
-      const idEvent = +req.params.id;
       //get all events
       let events = await event.findAll();
+
+      res.status(200).json(events);
+    } catch (e) {
+      res.status(500).json(e);
+    }
+  }
+
+  static async getOneEvent(req, res) {
+    try {
+      const idEvent = +req.params.id;
       //get one event with seat
-      let event = await event.findByPk({
+      let resEvent = await event.findOne({
         where: {
-          id: idEvent,
+          id: +idEvent,
         },
         include: {
           model: seat,
           attributes: ["numSeat", "status"],
+          where: {
+            eventId: +idEvent,
+          },
         },
       });
 
-      res.status(200).json(events);
+      res.status(200).json(resEvent);
     } catch (e) {
       res.status(500).json(e);
     }
@@ -41,7 +53,7 @@ class EventController {
         eventId: +resEvent.id,
       });
 
-      res.status(200).json(result);
+      res.status(200).json(resEvent);
     } catch (e) {
       res.status(500).json(e);
     }
@@ -79,10 +91,14 @@ class EventController {
   static async deleteEvent(req, res) {
     try {
       const idEvent = +req.params.id;
-      let deleteEvent = await event.delete({ where: { id: idEvent } });
-      let deleteSeat = await seat.delete({ where: { eventId: idEvent } });
-      let deleteBooking = await booking.delete({ where: { eventId: idEvent } });
-      let deletePayment = await payment.delete({ where: { eventId: idEvent } });
+      let deleteEvent = await event.destroy({ where: { id: idEvent } });
+      let deleteSeat = await seat.destroy({ where: { eventId: idEvent } });
+      let deleteBooking = await booking.destroy({
+        where: { eventId: idEvent },
+      });
+      let deletePayment = await payment.destroy({
+        where: { eventId: idEvent },
+      });
 
       deleteEvent
         ? res.status(200).json({ message: `Event deleted successfully` })
