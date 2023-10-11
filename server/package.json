@@ -7,7 +7,7 @@
     "start": "nodemon app.js",
     "db-install": "sequelize db:create && sequelize db:migrate",
     "db-reset": "sequelize db:drop && sequelize db:create && sequelize db:migrate",
-    "db-seed": "sequelize seed:generate --name (Your seed name)",
+    "db-seed": "sequelize seed:generate --name users",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {

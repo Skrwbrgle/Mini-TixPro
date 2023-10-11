@@ -5,8 +5,9 @@ const authentication = (req, res, next) => {
 
   if (access_token) {
     try {
-      let verifyToken = tokenVerifer(access_token);
-      req.userData = verifyToken;
+      let tokenUser = verifyToken(access_token);
+      req.userData = tokenUser;
+
       next();
     } catch (e) {
       res.status(401).json({

@@ -53,6 +53,18 @@ class UserController {
       console.log(err);
     }
   }
+
+  static async dashboard(req, res) {
+    try {
+      const role = req.userData.role;
+
+      role === "0"
+        ? res.status(200).json({ message: `admin` })
+        : res.status(200).json({ message: `user` });
+    } catch (e) {
+      res.status(500).json(e);
+    }
+  }
 }
 
 module.exports = UserController;

@@ -14,7 +14,7 @@ const generateToken = (payload) => {
     role,
     image,
   } = payload;
-  const token = jwt.sign(
+  return jwt.sign(
     {
       id,
       username,

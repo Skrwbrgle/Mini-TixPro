@@ -46,7 +46,7 @@ module.exports = (sequelize, DataTypes) => {
         allowNull: true,
       },
       identification: {
-        type: DataTypes.INTEGER,
+        type: DataTypes.BIGINT,
         unique: true,
         notEmpty: {
           message: "identification is required!",
