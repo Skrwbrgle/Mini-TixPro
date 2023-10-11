@@ -21,28 +21,6 @@ const authentication = (req, res, next) => {
   }
 };
 
-const isAdmin = (req, res, next) => {
-  if (req.userData.role === "0") {
-    next();
-  } else {
-    res.status(403).json({
-      message: "Access denied: Admin privilege required!",
-    });
-  }
-};
-
-const isUser = (req, res, next) => {
-  if (req.userData.role === "1") {
-    next();
-  } else {
-    res.status(403).json({
-      message: "Access denied: User privilege required!",
-    });
-  }
-};
-
 module.exports = {
   authentication,
-  isAdmin,
-  isUser,
 };
