@@ -1,7 +1,16 @@
 const userRoutes = require("express").Router();
+const { isAdmin, isUser } = require("../middlewares/authentication");
+const { UserController } = require("../controllers");
 
-userRoutes.get("/", (req, res) => {});
-userRoutes.get("/login", (req, res) => {});
-userRoutes.post("/register", (req, res) => {});
+userRoutes.get("/", UserController.getAllUser);
+userRoutes.get("/login", UserController.login);
+userRoutes.post("/register", UserController.register);
+
+userRoutes.get("/dashboard", (req, res) => {});
+
+userRoutes.put("/update/:id", isAdmin, (req, res) => {});
+userRoutes.delete("/delete/:id", isAdmin, (req, res) => {});
+
+userRoutes.get("/logout", (req, res) => {});
 
 module.exports = userRoutes;
