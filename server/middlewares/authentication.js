@@ -20,6 +20,15 @@ const authentication = (req, res, next) => {
   }
 };
 
+const tokenGenerator = (data) => {
+  const { username, email, password } = data;
+  return Jwt.sign({
+    username,
+    email,
+    password,
+  });
+};
+
 const isAdmin = (req, res, next) => {
   if (req.userData.role === "0") {
     next();

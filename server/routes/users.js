@@ -1,10 +1,14 @@
 const userRoutes = require("express").Router();
-const { isAdmin, isUser } = require("../middlewares/authentication");
+const {
+  isAdmin,
+  isUser,
+  authentication,
+} = require("../middlewares/authentication");
 const { UserController } = require("../controllers");
 
 userRoutes.get("/", UserController.getAllUser);
 userRoutes.get("/login", UserController.login);
-userRoutes.post("/register", UserController.register);
+userRoutes.post("/register", authentication, UserController.register);
 
 userRoutes.get("/dashboard", (req, res) => {});
 

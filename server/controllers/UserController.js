@@ -1,4 +1,5 @@
 const { user } = require("../models");
+const { tokenGenerator } = require("../middlewares/authentication");
 
 class UserController {
   static async getAllUser(req, res) {
@@ -33,6 +34,8 @@ class UserController {
           password,
         },
       });
+
+      user;
       res.status(200).json(user);
     } catch (err) {
       res.status(500).json(err);
