@@ -1,4 +1,4 @@
-const { verifyToken, tokenGuest } = require("../helpers/jwt");
+const { verifyToken } = require("../helpers/jwt");
 
 const authentication = (req, res, next) => {
   const access_token = req.headers.access_token;

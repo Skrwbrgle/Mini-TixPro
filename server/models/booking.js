@@ -12,7 +12,6 @@ module.exports = (sequelize, DataTypes) => {
       booking.belongsTo(models.event);
       booking.belongsTo(models.user);
       booking.belongsTo(models.payment);
-      booking.belongsTo(models.seat);
     }
   }
   booking.init(

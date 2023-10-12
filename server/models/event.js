@@ -16,11 +16,38 @@ module.exports = (sequelize, DataTypes) => {
   }
   event.init(
     {
-      title: DataTypes.STRING,
-      event_date: DataTypes.DATE,
-      address: DataTypes.STRING,
-      price: DataTypes.INTEGER,
-      image: DataTypes.STRING,
+      title: {
+        type: DataTypes.STRING,
+        allowNull: false,
+        notEmpty: {
+          message: "Title Event cannot be empty",
+        },
+      },
+      event_date: {
+        type: DataTypes.DATE,
+        allowNull: false,
+        notEmpty: {
+          message: "Event Date cannot be empty",
+        },
+      },
+      address: {
+        type: DataTypes.STRING,
+        allowNull: false,
+        notEmpty: {
+          message: "Address cannot be empty",
+        },
+      },
+      price: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+        notEmpty: {
+          message: "Price cannot be empty",
+        },
+      },
+      image: {
+        type: DataTypes.STRING,
+        allowNull: true,
+      },
     },
     {
       sequelize,

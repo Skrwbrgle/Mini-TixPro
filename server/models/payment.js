@@ -11,12 +11,18 @@ module.exports = (sequelize, DataTypes) => {
       // define association here
       payment.belongsTo(models.user);
       payment.belongsTo(models.event);
+      payment.belongsTo(models.seat);
       payment.hasMany(models.booking);
     }
   }
   payment.init(
     {
-      total_ticket: DataTypes.INTEGER,
+      total_ticket: {
+        type: DataTypes.INTEGER,
+        notEmpty: {
+          message: "Total Ticket cannot be empty",
+        },
+      },
       status: {
         type: DataTypes.ENUM,
         values: ["approved", "rejected", "pending"],
@@ -25,6 +31,8 @@ module.exports = (sequelize, DataTypes) => {
       midtransToken: DataTypes.STRING,
       userId: DataTypes.INTEGER,
       eventId: DataTypes.INTEGER,
+      seatId: DataTypes.STRING,
+      orderId: DataTypes.STRING,
     },
     {
       sequelize,
