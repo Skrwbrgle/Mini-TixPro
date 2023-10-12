@@ -28,7 +28,7 @@ module.exports = {
         type: Sequelize.INTEGER,
       },
       seatId: {
-        type: Sequelize.STRING,
+        type: Sequelize.ARRAY(DataTypes.INTEGER),
       },
       orderId: {
         type: Sequelize.STRING,
