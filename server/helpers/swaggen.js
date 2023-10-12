@@ -1,14 +1,5 @@
 const swaggerAutogen = require("swagger-autogen")();
 
-const path = require("path");
-const fs = require("fs");
-const folderPath = path.join(__dirname, "../json");
-const files = fs.readdirSync(folderPath);
-const latestIndex = files
-  .filter((file) => file.startsWith("swagger"))
-  .map((file) => parseInt(file.replace("swagger", "").replace(".json", ""), 10))
-  .reduce((max, current) => (current > max ? current : max), 0);
-
 const doc = {
   info: {
     title: "TixPro API",
@@ -17,12 +8,19 @@ const doc = {
   },
   host: "localhost:3000",
   basePath: "/",
-  schemes: ["http"],
-  consumes: ["application/json"],
-  produces: ["application/json"],
+  schemes: "http",
+  securityDefinitions: {
+    JWT: {
+      type: "apiKey",
+      description: "Type into the textbox: Bearer {your JWT token}.",
+      name: "x-auth-token",
+      in: "header",
+    },
+  },
+  security: [{ JWT: [] }],
 };
 
-const outputFile = path.join(folderPath, `swagger${latestIndex + 1}.json`);
+const outputFile = "../json/swagger.json";
 const endpointsFiles = ["./app.js"];
 
 swaggerAutogen(outputFile, endpointsFiles, doc);
