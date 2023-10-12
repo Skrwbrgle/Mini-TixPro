@@ -1,6 +1,6 @@
 const { payment, event, seat } = require("../models");
 const midtransClient = require("midtrans-client");
-const { sumPay, createOrder } = require("../helpers/sumPrice");
+const { sumPay, createOrder } = require("../helpers/order");
 const { Op } = require("sequelize");
 
 class PaymentController {
@@ -141,7 +141,6 @@ class PaymentController {
       }
     } catch (err) {
       res.status(500).json(err);
-      console.log(err);
     }
   }
 
@@ -159,7 +158,7 @@ class PaymentController {
       const statusOrder =
         transaction_status === "settlement" ? "approved" : "rejected";
 
-      let userPay = await payment.update(
+      await payment.update(
         {
           status: statusOrder,
         },
@@ -174,7 +173,6 @@ class PaymentController {
       });
     } catch (err) {
       res.status(500).json(err);
-      // console.log(err);
     }
   }
 }
