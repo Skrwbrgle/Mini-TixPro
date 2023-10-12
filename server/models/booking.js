@@ -19,7 +19,6 @@ module.exports = (sequelize, DataTypes) => {
       userId: DataTypes.INTEGER,
       eventId: DataTypes.INTEGER,
       paymentId: DataTypes.INTEGER,
-      seatId: DataTypes.INTEGER,
       barcode: DataTypes.STRING,
     },
     {
