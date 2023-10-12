@@ -13,14 +13,14 @@ const doc = {
     JWT: {
       type: "apiKey",
       description: "Type into the textbox: Bearer {your JWT token}.",
-      name: "x-auth-token",
+      name: "access_token",
       in: "header",
     },
   },
   security: [{ JWT: [] }],
 };
 
-const outputFile = "../json/swagger.json";
+const outputFile = "../json/swagger2.json";
 const endpointsFiles = ["./app.js"];
 
 swaggerAutogen(outputFile, endpointsFiles, doc);

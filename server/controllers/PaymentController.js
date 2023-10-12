@@ -1,6 +1,6 @@
 const { payment, event, seat } = require("../models");
 const midtransClient = require("midtrans-client");
-const { sumPay, createOrder } = require("../helpers/sumPrice");
+const { sumPay, createOrder } = require("../helpers/order");
 const { Op } = require("sequelize");
 
 class PaymentController {

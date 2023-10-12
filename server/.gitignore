@@ -1,9 +1,9 @@
 Ignoring Package
 node_modules/
+json/
 
 Ignoring Files
 package-lock.json
 .env
 config/config.json
 SCRIPT.md
-json/swagger.json
