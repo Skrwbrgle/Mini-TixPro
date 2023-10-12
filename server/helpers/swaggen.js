@@ -20,7 +20,7 @@ const doc = {
   security: [{ JWT: [] }],
 };
 
-const outputFile = "../json/swagger2.json";
+const outputFile = "../json/swagger.json";
 const endpointsFiles = ["./app.js"];
 
 swaggerAutogen(outputFile, endpointsFiles, doc);
