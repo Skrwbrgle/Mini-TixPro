@@ -1,6 +1,6 @@
-const { payment, event } = require("../models");
 const midtransClient = require("midtrans-client");
-const { sumPay, createOrder } = require("../helpers/sumPrice");
+const { payment, event } = require("../models");
+const { sumPay, createOrder } = require("../helpers/order");
 
 class PaymentController {
   static async getPayment(req, res) {
@@ -112,8 +112,7 @@ class PaymentController {
         res.status(200).json({ userPay });
       }
     } catch (err) {
-      // res.status(500).json(err);
-      console.log(err);
+      res.status(500).json(err);
     }
   }
 
@@ -132,7 +131,7 @@ class PaymentController {
       const statusOrder =
         transaction_status === "settlement" ? "approved" : "rejected";
 
-      let userPay = await payment.update(
+      await payment.update(
         {
           status: statusOrder,
         },
@@ -147,7 +146,6 @@ class PaymentController {
       });
     } catch (err) {
       res.status(500).json(err);
-      // console.log(err);
     }
   }
 }
