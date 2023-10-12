@@ -1,11 +1,12 @@
 const userRoutes = require("express").Router();
-const { authentication } = require("../middlewares/authentication");
+const { authentication, logoutAuth } = require("../middlewares/authentication");
 const { UserController } = require("../controllers");
 
 userRoutes.post("/login", UserController.login);
 userRoutes.post("/register", UserController.register);
 //Dashboard
 userRoutes.get("/dashboard", authentication, UserController.dashboard);
+userRoutes.get("/dashboard/logout", logoutAuth, UserController.dashboard);
 
 //Untuk Admin
 userRoutes.get("/", authentication, UserController.getUser);
@@ -15,7 +16,5 @@ userRoutes.delete(
   UserController.deleteUserByAdmin
 );
 userRoutes.delete("/delete", authentication, UserController.deleteUserByUser);
-
-userRoutes.get("/logout", UserController.logout);
 
 module.exports = userRoutes;
