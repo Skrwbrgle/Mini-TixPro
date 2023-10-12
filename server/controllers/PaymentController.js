@@ -1,6 +1,6 @@
 const { payment, event } = require("../models");
 const midtransClient = require("midtrans-client");
-const sumPay = require("../helpers/sumPrice");
+const { sumPay, createOrder } = require("../helpers/sumPrice");
 
 class PaymentController {
   static async getPayment(req, res) {
@@ -25,6 +25,7 @@ class PaymentController {
   }
   static async getPaymentDetail(req, res) {
     try {
+      console.log(req.query);
       const { id, role } = req.userData;
       const idPayment = +req.params.id;
 
@@ -57,13 +58,19 @@ class PaymentController {
     try {
       const { id, role, username, email, no_telp } = req.userData;
       const idEvent = +req.params.id;
-      const { total_ticket } = req.body;
+      const { seats_order } = req.body;
       const payments = await payment.findAll({
         order: [["id", "DESC"]],
         limit: 1,
       });
 
       if (role === "1") {
+        const arrSeat = seats_order
+          .split(",")
+          .map((e) => +e)
+          .filter((e) => e !== 0);
+        console.log("A-1");
+        const seatId = JSON.stringify([...arrSeat.map((v) => v)]);
         let getPriceEvent = await event.findOne({
           where: {
             id: idEvent,
@@ -75,10 +82,11 @@ class PaymentController {
           serverKey: "SB-Mid-server-Nb1R0x1JOCqBdsao4voyP9Z3",
         });
 
+        const idOrder = createOrder();
         let parameter = {
           transaction_details: {
-            order_id: "ORDER-" + (payments[0].id + 1),
-            gross_amount: sumPay(getPriceEvent.price, total_ticket),
+            order_id: idOrder,
+            gross_amount: sumPay(getPriceEvent.price, arrSeat.length),
           },
           credit_card: {
             secure: true,
@@ -94,8 +102,10 @@ class PaymentController {
         let transactionToken = transaction.token;
         let userPay = await payment.create({
           userId: +id,
-          eventId: idEvent,
-          total_ticket,
+          eventId: +idEvent,
+          seatId,
+          orderId: idOrder,
+          total_ticket: arrSeat.length,
           midtransToken: transactionToken,
         });
 
@@ -109,35 +119,35 @@ class PaymentController {
 
   static async approvePayment(req, res) {
     try {
-      const { id, role } = req.userData;
+      console.log(req.query);
       const { order_id, transaction_status } = req.query;
 
-      const idOrder = order_id.match(/\d/g).join("");
+      if (!["settlement", "rejected"].includes(transaction_status)) {
+        res.status(403).json({
+          message: `Bad Request`,
+        });
+        return;
+      }
+
       const statusOrder =
         transaction_status === "settlement" ? "approved" : "rejected";
 
-      if (role === "1") {
-        let userPay = await payment.update(
-          {
-            status: statusOrder,
+      let userPay = await payment.update(
+        {
+          status: statusOrder,
+        },
+        {
+          where: {
+            orderId: order_id,
           },
-          {
-            where: {
-              id: +idOrder,
-            },
-          }
-        );
-        res.status(201).json({
-          message: `Payment status ${statusOrder}!`,
-        });
-      } else {
-        res.status(403).json({
-          message: `Access denided`,
-        });
-      }
+        }
+      );
+      res.status(201).json({
+        message: `Payment status ${statusOrder}!`,
+      });
     } catch (err) {
-      // res.status(500).json(err);
-      console.log(err);
+      res.status(500).json(err);
+      // console.log(err);
     }
   }
 }

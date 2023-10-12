@@ -10,12 +10,17 @@ module.exports = (sequelize, DataTypes) => {
     static associate(models) {
       // define association here
       seat.belongsTo(models.event);
-      seat.hasOne(models.booking);
+      seat.hasOne(models.payment);
     }
   }
   seat.init(
     {
-      numSeat: DataTypes.STRING,
+      numSeat: {
+        type: DataTypes.STRING,
+        notEmpty: {
+          message: "Number Seat cannot be empty",
+        },
+      },
       status: {
         type: DataTypes.BOOLEAN,
         defaultValue: false,

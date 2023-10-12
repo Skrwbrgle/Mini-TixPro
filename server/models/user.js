@@ -54,9 +54,7 @@ module.exports = (sequelize, DataTypes) => {
       },
       age: {
         type: DataTypes.INTEGER,
-        notEmpty: {
-          message: "age is required!",
-        },
+        allowNull: true,
       },
       gender: {
         type: DataTypes.ENUM,
@@ -66,17 +64,11 @@ module.exports = (sequelize, DataTypes) => {
         type: DataTypes.ENUM,
         values: ["0", "1"], //0 = admin, 1 = user
       },
-      image: {
-        type: DataTypes.STRING,
-      },
     },
     {
       hooks: {
         beforeCreate: (user, options) => {
           user.password = encrypt(user.password);
-          user.image =
-            user.image ||
-            "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_640.png";
           user.no_telp = user.no_telp || "";
           user.address = user.address || "";
           user.age = user.age || 0;
