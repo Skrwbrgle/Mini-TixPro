@@ -31,7 +31,7 @@ module.exports = (sequelize, DataTypes) => {
       midtransToken: DataTypes.STRING,
       userId: DataTypes.INTEGER,
       eventId: DataTypes.INTEGER,
-      seatId: DataTypes.STRING,
+      seatId: DataTypes.ARRAY(DataTypes.INTEGER),
       orderId: DataTypes.STRING,
     },
     {

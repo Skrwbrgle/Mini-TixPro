@@ -1,6 +1,7 @@
+const { payment, event, seat } = require("../models");
 const midtransClient = require("midtrans-client");
-const { payment, event } = require("../models");
-const { sumPay, createOrder } = require("../helpers/order");
+const { sumPay, createOrder } = require("../helpers/sumPrice");
+const { Op } = require("sequelize");
 
 class PaymentController {
   static async getPayment(req, res) {
@@ -59,18 +60,45 @@ class PaymentController {
       const { id, role, username, email, no_telp } = req.userData;
       const idEvent = +req.params.id;
       const { seats_order } = req.body;
-      const payments = await payment.findAll({
-        order: [["id", "DESC"]],
-        limit: 1,
-      });
 
       if (role === "1") {
+        if (!seats_order) {
+          res.status(403).json({
+            message: `Bad Request`,
+          });
+          return;
+        }
         const arrSeat = seats_order
           .split(",")
           .map((e) => +e)
           .filter((e) => e !== 0);
-        console.log("A-1");
-        const seatId = JSON.stringify([...arrSeat.map((v) => v)]);
+        const seatExist = await seat.findAll({
+          where: {
+            id: arrSeat,
+          },
+        });
+        if (seatExist.length !== arrSeat.length) {
+          res.status(403).json({
+            message: `Some seat not exist`,
+          });
+          return;
+        }
+
+        const seatBooked = await payment.findAll({
+          where: {
+            eventId: idEvent,
+            [Op.not]: [{ status: "rejected" }],
+            seatId: { [Op.overlap]: arrSeat },
+          },
+        });
+
+        if (seatBooked.length !== 0) {
+          res.status(403).json({
+            message: `Some seat has been Booked`,
+          });
+          return;
+        }
+
         let getPriceEvent = await event.findOne({
           where: {
             id: idEvent,
@@ -103,7 +131,7 @@ class PaymentController {
         let userPay = await payment.create({
           userId: +id,
           eventId: +idEvent,
-          seatId,
+          seatId: arrSeat,
           orderId: idOrder,
           total_ticket: arrSeat.length,
           midtransToken: transactionToken,
@@ -116,12 +144,11 @@ class PaymentController {
     }
   }
 
-  static async approvePayment(req, res) {
+  static async updateStatus(req, res) {
     try {
-      console.log(req.query);
       const { order_id, transaction_status } = req.query;
 
-      if (!["settlement", "rejected"].includes(transaction_status)) {
+      if (!["settlement", "expire"].includes(transaction_status)) {
         res.status(403).json({
           message: `Bad Request`,
         });
