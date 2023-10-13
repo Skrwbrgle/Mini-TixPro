@@ -19,29 +19,37 @@ module.exports = (sequelize, DataTypes) => {
       title: {
         type: DataTypes.STRING,
         allowNull: false,
-        notEmpty: {
-          message: "Title Event cannot be empty",
+        validate: {
+          notEmpty: {
+            message: "Title Event cannot be empty",
+          },
         },
       },
       event_date: {
         type: DataTypes.DATE,
         allowNull: false,
-        notEmpty: {
-          message: "Event Date cannot be empty",
+        validate: {
+          notEmpty: {
+            message: "Event Date cannot be empty",
+          },
         },
       },
       address: {
         type: DataTypes.STRING,
         allowNull: false,
-        notEmpty: {
-          message: "Address cannot be empty",
+        validate: {
+          notEmpty: {
+            message: "Address cannot be empty",
+          },
         },
       },
       price: {
         type: DataTypes.INTEGER,
         allowNull: false,
-        notEmpty: {
-          message: "Price cannot be empty",
+        validate: {
+          notEmpty: {
+            message: "Price cannot be empty",
+          },
         },
       },
       image: {

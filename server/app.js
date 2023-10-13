@@ -21,6 +21,7 @@ app.use(
     explorer: true,
     swaggerOptions: {
       docExpansion: "none",
+      persistAuthorization: true,
       urls: [
         {
           url: "/swagger/v1/swagger.json",

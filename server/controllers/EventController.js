@@ -25,10 +25,7 @@ class EventController {
           },
           include: {
             model: seat,
-            attributes: ["numSeat", "status"],
-            where: {
-              eventId: +idEvent,
-            },
+            attributes: ["numSeat"],
           },
         });
 
@@ -70,26 +67,33 @@ class EventController {
     try {
       const idEvent = +req.params.id;
       const { title, event_date, address, price, image } = req.body;
-      let resEdit = await event.update(
-        {
-          title,
-          event_date,
-          address,
-          price,
-          image,
-        },
-        {
-          where: { id: idEvent },
-        }
-      );
+      const roleAccess = req.userData.role;
 
-      resEdit === 1
-        ? res.status(200).json({
-            message: `Event updated successfully`,
-          })
-        : res.status(404).json({
-            message: `Can not update event with ${idEvent}`,
-          });
+      if (roleAccess === "0") {
+        let resEdit = await event.update(
+          {
+            title,
+            event_date,
+            address,
+            price,
+            image,
+          },
+          {
+            where: { id: idEvent },
+          }
+        );
+        resEdit[0] === 1
+          ? res.status(200).json({
+              message: `Event updated successfully`,
+            })
+          : res.status(404).json({
+              message: `Can not update event with ${idEvent}`,
+            });
+      } else {
+        res
+          .status(403)
+          .json({ message: "Access denied: Admin privilege required!" });
+      }
     } catch (e) {
       res.status(500).json(e);
     }
@@ -98,18 +102,28 @@ class EventController {
   static async deleteEvent(req, res) {
     try {
       const idEvent = +req.params.id;
-      let deleteEvent = await event.destroy({ where: { id: idEvent } });
-      let deleteSeat = await seat.destroy({ where: { eventId: idEvent } });
-      let deleteBooking = await booking.destroy({
-        where: { eventId: idEvent },
-      });
-      let deletePayment = await payment.destroy({
-        where: { eventId: idEvent },
-      });
+      const roleAccess = req.userData.role;
 
-      deleteEvent === 1
-        ? res.status(200).json({ message: `Event deleted successfully` })
-        : res.status(404).json({ message: `Event with ${idEvent} not found` });
+      if (roleAccess === "0") {
+        let deleteEvent = await event.destroy({ where: { id: idEvent } });
+        let deleteSeat = await seat.destroy({ where: { eventId: idEvent } });
+        let deleteBooking = await booking.destroy({
+          where: { eventId: idEvent },
+        });
+        let deletePayment = await payment.destroy({
+          where: { eventId: idEvent },
+        });
+
+        deleteEvent === 1
+          ? res.status(200).json({ message: `Event deleted successfully` })
+          : res
+              .status(404)
+              .json({ message: `Event with ${idEvent} not found` });
+      } else {
+        res
+          .status(403)
+          .json({ message: "Access denied: Admin privilege required!" });
+      }
     } catch (e) {
       res.status(500).json(e);
     }

@@ -92,6 +92,10 @@ class UserController {
           : res
               .status(403)
               .json({ message: "User not found or already deleted" });
+      } else {
+        res
+          .status(403)
+          .json({ message: "Access denied: Admin privilege required!" });
       }
     } catch (err) {
       res.status(500).json(err);
@@ -100,38 +104,46 @@ class UserController {
 
   static async deleteUserByUser(req, res) {
     try {
-      const { role, id } = req.userData;
+      const role = req.userData.role;
+      if (role === "1") {
+        const { role, id } = req.userData;
+        const getUser = await user.findByPk(+id);
 
-      const getUser = await user.findByPk(id);
+        const deleteAcc = await user.destroy({
+          where: {
+            id,
+            role,
+          },
+        });
 
-      const deleteAcc = await user.destroy({
-        where: {
-          id,
-          role,
-        },
-      });
-
-      deleteAcc === 1
-        ? res
-            .status(200)
-            .json({ message: `${getUser.username} deleted successfully` })
-        : res.status(403).json({ message: `Cant not delete account` });
+        deleteAcc === 1
+          ? res
+              .status(200)
+              .json({ message: `${getUser.username} deleted successfully` })
+          : res.status(403).json({ message: `Cant not delete account` });
+      } else {
+        res.status(403).json({ message: "Access denied" });
+      }
     } catch (err) {
-      res.status(500).json(err);
+      // res.status(500).json(err);
+      res.json(err);
     }
   }
 
-  static async update(req, res) {}
-
-  static async logout(req, res) {
-    const blacklistedTokens = new Set();
+  static async update(req, res) {
     try {
-      const { access_token } = req.headers;
-      if (access_token) {
-        blacklistedTokens.add(access_token);
-        res.status(200).json({ message: "Logged out successfully" });
+      const { username, email, password, identification } = req.body;
+      const roleAccess = req.userData.role;
+
+      if (roleAccess === 0) {
+        const newUser = await user.create({
+          username,
+          email,
+          password,
+          identification,
+        });
+        res.status(201).json(newUser);
       } else {
-        res.status(401).json({ message: "No token provided" });
       }
     } catch (err) {
       res.status(500).json(err);

@@ -19,22 +19,28 @@ module.exports = (sequelize, DataTypes) => {
       username: {
         type: DataTypes.STRING,
         allowNull: false,
-        notEmpty: {
-          message: "username cannot be empty",
+        validate: {
+          notEmpty: {
+            message: "username cannot be empty",
+          },
         },
       },
       email: {
         type: DataTypes.STRING,
         allowNull: false,
-        notEmpty: {
-          message: "email cannot be empty!",
+        validate: {
+          notEmpty: {
+            message: "email cannot be empty!",
+          },
         },
       },
       password: {
         type: DataTypes.STRING,
         allowNull: false,
-        notEmpty: {
-          message: "password cannot be empty!",
+        validate: {
+          notEmpty: {
+            message: "password cannot be empty!",
+          },
         },
       },
       no_telp: {
@@ -48,8 +54,11 @@ module.exports = (sequelize, DataTypes) => {
       identification: {
         type: DataTypes.BIGINT,
         unique: true,
-        notEmpty: {
-          message: "identification is required!",
+        allowNull: false,
+        validate: {
+          notEmpty: {
+            message: "identification is required!",
+          },
         },
       },
       age: {
