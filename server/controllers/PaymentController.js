@@ -30,8 +30,6 @@ class PaymentController {
       const idPayment = +req.params.id;
       const allPayment = await payment.findAll();
 
-      console.log(allPayment);
-
       if (allPayment.forEach((e) => e.id !== idPayment)) {
         res
           .status(400)
@@ -60,8 +58,7 @@ class PaymentController {
         });
       }
     } catch (err) {
-      // res.status(500).json(err);
-      console.log(err);
+      res.status(500).json(err);
     }
   }
 

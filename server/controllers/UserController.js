@@ -127,7 +127,6 @@ class UserController {
       }
     } catch (err) {
       res.status(500).json(err);
-      // res.json(err);
     }
   }
 
@@ -183,8 +182,6 @@ class UserController {
             where: { id },
           }
         );
-
-        console.log("A-3");
 
         newUser[0] === 1
           ? res
