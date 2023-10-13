@@ -14,7 +14,7 @@ class PaymentController {
             userId: +id,
           },
         });
-        res.status(200).json({ userPay });
+        res.status(200).json(userPay);
       } else {
         res.status(403).json({
           message: `Access denided`,
@@ -137,7 +137,7 @@ class PaymentController {
           midtransToken: transactionToken,
         });
 
-        res.status(200).json({ userPay });
+        res.status(200).json(userPay);
       }
     } catch (err) {
       res.status(500).json(err);
