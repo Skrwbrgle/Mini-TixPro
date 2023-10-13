@@ -84,6 +84,10 @@ module.exports = (sequelize, DataTypes) => {
           user.gender = user.gender || "0";
           user.role = user.role || "1";
         },
+        // afterUpdate: (user, options) => {
+        //   console.log(user);
+        //   user.password = encrypt(user.password);
+        // },
       },
       sequelize,
       modelName: "user",

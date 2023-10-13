@@ -1,6 +1,7 @@
 const { user, event } = require("../models");
 const { decrypt } = require("../helpers/bcrypt");
 const { generateToken } = require("../helpers/jwt");
+const { encrypt } = require("../helpers/bcrypt");
 
 class UserController {
   static async getUser(req, res) {
@@ -125,25 +126,73 @@ class UserController {
         res.status(403).json({ message: "Access denied" });
       }
     } catch (err) {
-      // res.status(500).json(err);
-      res.json(err);
+      res.status(500).json(err);
+      // res.json(err);
     }
   }
 
-  static async update(req, res) {
+  static async updateUser(req, res) {
     try {
-      const { username, email, password, identification } = req.body;
-      const roleAccess = req.userData.role;
+      const idUser = +req.params.id;
+      const { role, id } = req.userData;
+      const {
+        username,
+        email,
+        password,
+        identification,
+        no_telp,
+        address,
+        age,
+        gender,
+        role_user,
+      } = req.body;
 
-      if (roleAccess === 0) {
-        const newUser = await user.create({
-          username,
-          email,
-          password,
-          identification,
-        });
-        res.status(201).json(newUser);
+      if (role === "0") {
+        const newUser = await user.update(
+          {
+            username,
+            email,
+            password: encrypt(password),
+            no_telp,
+            address,
+            identification,
+            age,
+            gender,
+            role: role_user,
+          },
+          {
+            where: { id: idUser },
+          }
+        );
+
+        newUser[0] === 1
+          ? res
+              .status(200)
+              .json({ message: `User ${username} has been updated!` })
+          : res.status(400).json({ message: `Cannot update user ${username}` });
+      } else if (role === "1") {
+        const newUser = await user.update(
+          {
+            username,
+            no_telp,
+            address,
+            age,
+            gender,
+          },
+          {
+            where: { id },
+          }
+        );
+
+        console.log("A-3");
+
+        newUser[0] === 1
+          ? res
+              .status(200)
+              .json({ message: `User ${username} has been updated!` })
+          : res.status(400).json({ message: `Cannot update user ${username}` });
       } else {
+        res.status(403).json({ message: `Access denied` });
       }
     } catch (err) {
       res.status(500).json(err);
