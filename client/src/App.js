@@ -1,7 +1,12 @@
 import "./App.css";
+import { NavigateBar } from "./components";
 
 function App() {
-  return <></>;
+  return (
+    <>
+      <NavigateBar></NavigateBar>
+    </>
+  );
 }
 
 export default App;
