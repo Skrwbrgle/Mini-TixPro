@@ -17,6 +17,58 @@
     }
   },
   "paths": {
+    "/api/users": {
+      "get": {
+        "description": "",
+        "tags": ["User"],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "example": 0
+                  },
+                  "username": {
+                    "example": "string"
+                  },
+                  "email": {
+                    "example": "string"
+                  },
+                  "no_telp": {
+                    "example": "string"
+                  },
+                  "address": {
+                    "example": "string"
+                  },
+                  "identification": {
+                    "example": "string"
+                  },
+                  "age": {
+                    "example": 0
+                  },
+                  "gender": {
+                    "example": "string"
+                  },
+                  "role": {
+                    "example": "string"
+                  },
+                  "createdAt": {
+                    "example": "string"
+                  },
+                  "updatedAt": {
+                    "example": "string"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/users/login": {
       "post": {
         "description": "",
@@ -150,51 +202,62 @@
         }
       }
     },
-    "/api/users": {
-      "get": {
+    "/api/users/update/{id}": {
+      "put": {
         "description": "",
         "tags": ["User"],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "username": {
+                  "example": "string"
+                },
+                "email": {
+                  "example": "string"
+                },
+                "password": {
+                  "example": "string"
+                },
+                "identification": {
+                  "example": 0
+                },
+                "no_telp": {
+                  "example": "string"
+                },
+                "address": {
+                  "example": "string"
+                },
+                "age": {
+                  "example": 0
+                },
+                "gender": {
+                  "example": "string"
+                },
+                "role": {
+                  "example": "string"
+                }
+              }
+            }
+          }
+        ],
         "responses": {
           "200": {
             "description": "",
             "schema": {
-              "type": "array",
-              "items": {
-                "type": "object",
-                "properties": {
-                  "id": {
-                    "example": 0
-                  },
-                  "username": {
-                    "example": "string"
-                  },
-                  "email": {
-                    "example": "string"
-                  },
-                  "no_telp": {
-                    "example": "string"
-                  },
-                  "address": {
-                    "example": "string"
-                  },
-                  "identification": {
-                    "example": "string"
-                  },
-                  "age": {
-                    "example": 0
-                  },
-                  "gender": {
-                    "example": "string"
-                  },
-                  "role": {
-                    "example": "string"
-                  },
-                  "createdAt": {
-                    "example": "string"
-                  },
-                  "updatedAt": {
-                    "example": "string"
-                  }
+              "type": "object",
+              "properties": {
+                "message": {
+                  "example": "string"
                 }
               }
             }

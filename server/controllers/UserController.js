@@ -127,7 +127,6 @@ class UserController {
       }
     } catch (err) {
       res.status(500).json(err);
-      // res.json(err);
     }
   }
 
@@ -171,6 +170,10 @@ class UserController {
               .json({ message: `User ${username} has been updated!` })
           : res.status(400).json({ message: `Cannot update user ${username}` });
       } else if (role === "1") {
+        if (id !== idUser) {
+          res.status(403).json({ message: `Access denied` });
+          return;
+        }
         const newUser = await user.update(
           {
             username,
@@ -183,8 +186,6 @@ class UserController {
             where: { id },
           }
         );
-
-        console.log("A-3");
 
         newUser[0] === 1
           ? res
