@@ -147,7 +147,7 @@ class PaymentController {
           midtransToken: transactionToken,
         });
 
-        res.status(200).json({ userPay });
+        res.status(200).json(userPay);
       }
     } catch (err) {
       res.status(500).json(err);

@@ -117,7 +117,7 @@ class EventController {
         deleteEvent === 1
           ? res.status(200).json({ message: `Event deleted successfully` })
           : res
-              .status(404)
+              .status(400)
               .json({ message: `Event with ${idEvent} not found` });
       } else {
         res
