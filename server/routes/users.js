@@ -6,7 +6,6 @@ userRoutes.post("/login", UserController.login);
 userRoutes.post("/register", UserController.register);
 //Dashboard
 userRoutes.get("/dashboard", authentication, UserController.dashboard);
-userRoutes.get("/dashboard/logout", logoutAuth, UserController.dashboard);
 
 //Untuk Admin
 userRoutes.get("/", authentication, UserController.getUser);

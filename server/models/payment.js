@@ -19,8 +19,11 @@ module.exports = (sequelize, DataTypes) => {
     {
       total_ticket: {
         type: DataTypes.INTEGER,
-        notEmpty: {
-          message: "Total Ticket cannot be empty",
+        allowNull: false,
+        validate: {
+          notEmpty: {
+            message: "Total Ticket cannot be empty",
+          },
         },
       },
       status: {

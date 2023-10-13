@@ -1,6 +1,5 @@
 Ignoring Package
 node_modules/
-json/
 
 Ignoring Files
 package-lock.json
