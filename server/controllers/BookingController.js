@@ -9,7 +9,7 @@ class BookingController {
       });
 
       if (role === "1") {
-        if (resPayment.langth !== 0) {
+        if (resPayment.length !== 0) {
           resPayment.forEach((e) => {
             booking.create({
               userId: +id,

@@ -14,7 +14,7 @@ class PaymentController {
             userId: +id,
           },
         });
-        res.status(200).json({ userPay });
+        res.status(200).json(userPay);
       } else {
         res.status(403).json({
           message: `Access denided`,
@@ -26,9 +26,18 @@ class PaymentController {
   }
   static async getPaymentDetail(req, res) {
     try {
-      console.log(req.query);
       const { id, role } = req.userData;
       const idPayment = +req.params.id;
+      const allPayment = await payment.findAll();
+
+      console.log(allPayment);
+
+      if (allPayment.forEach((e) => e.id !== idPayment)) {
+        res
+          .status(400)
+          .json({ message: `Payment whit id ${idPayment} not found` });
+        return;
+      }
 
       if (role === "1") {
         let userPay = await payment.findOne({
@@ -51,7 +60,8 @@ class PaymentController {
         });
       }
     } catch (err) {
-      res.status(500).json(err);
+      // res.status(500).json(err);
+      console.log(err);
     }
   }
 

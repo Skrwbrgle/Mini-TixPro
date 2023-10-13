@@ -14,6 +14,7 @@ userRoutes.delete(
   authentication,
   UserController.deleteUserByAdmin
 );
+userRoutes.put("/update/:id", authentication, UserController.updateUser);
 userRoutes.delete("/delete", authentication, UserController.deleteUserByUser);
 
 module.exports = userRoutes;

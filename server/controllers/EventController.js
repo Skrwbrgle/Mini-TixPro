@@ -86,8 +86,8 @@ class EventController {
           ? res.status(200).json({
               message: `Event updated successfully`,
             })
-          : res.status(404).json({
-              message: `Can not update event with ${idEvent}`,
+          : res.status(400).json({
+              message: `Cannot update event with ${idEvent}`,
             });
       } else {
         res
