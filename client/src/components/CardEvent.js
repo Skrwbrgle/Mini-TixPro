@@ -3,8 +3,11 @@ import Card from "react-bootstrap/Card";
 function CardEvent() {
   return (
     <>
-      <Card className="bg-dark text-white ">
-        <Card.Img src="https://picsum.photos/932/270" alt="Card image" />
+      <Card className="Carding bg-light border-light">
+        <Card.Img
+          className="Card-Image"
+          src="https://via.placeholder.com/932x270"
+        />
         <Card.ImgOverlay>
           <Card.Title>Card title</Card.Title>
           <Card.Text>
