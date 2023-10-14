@@ -2,9 +2,9 @@ import { Button, Container, Form, Nav, Navbar, Row } from "react-bootstrap";
 
 function NavigateBar() {
   return (
-    <Navbar expand="lg" className="bg-body-tertiary">
+    <Navbar expand="lg" className="bg-body-tertiary sticky-top">
       <Container fluid>
-        <Navbar.Brand href="#">TixPro</Navbar.Brand>
+        <Navbar.Brand href="/">TixPro</Navbar.Brand>
         <Navbar.Toggle aria-controls="navbarScroll" />
         <Navbar.Collapse id="navbarScroll">
           <Container>
