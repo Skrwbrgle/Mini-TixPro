@@ -1,3 +1,4 @@
+import React from "react";
 import { Button, Container, Form, Nav, Navbar, Row } from "react-bootstrap";
 
 function NavigateBar() {
@@ -13,10 +14,18 @@ function NavigateBar() {
               // style={{ maxHeight: "100px" }}
               // navbarScroll
               >
-                <Nav.Link href="/">Home</Nav.Link>
-                <Nav.Link href="/profile">Profile</Nav.Link>
-                <Nav.Link href="#">Payment</Nav.Link>
-                <Nav.Link href="#">My Ticket</Nav.Link>
+                <Nav.Link href="/" className="nav-hover">
+                  Home
+                </Nav.Link>
+                <Nav.Link href="/profile" className="nav-hover">
+                  Profile
+                </Nav.Link>
+                <Nav.Link href="#" className="nav-hover">
+                  Payment
+                </Nav.Link>
+                <Nav.Link href="#" className="nav-hover">
+                  My Ticket
+                </Nav.Link>
               </Nav>
             </Row>
           </Container>
