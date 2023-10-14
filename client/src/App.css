@@ -1,8 +1,11 @@
 /* Card */
 .Carding {
   overflow: hidden;
+  max-height: 200px;
 }
 .Carding:hover {
   transform: scale(1.05);
-  transition: transform 0.3s ease-in-out;
+  max-height: 300px;
+  transition: transform 0.4s ease-in-out;
+  transition: max-height 0.5s ease-in-out;
 }
