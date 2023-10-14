@@ -1,3 +1,4 @@
+import React from "react";
 import { Button, Container, Form, Nav, Navbar, Row } from "react-bootstrap";
 
 function NavigateBar() {
