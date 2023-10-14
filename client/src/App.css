@@ -99,4 +99,13 @@
     justify-content: center; /* Mengatur kursi ke tengah secara horizontal */
     text-align: center; /* Mengatur teks ke tengah */
   }
+  .Carding {
+    max-height: 100px;
+  }
+
+  .Carding:hover {
+    transform: scale(1.05);
+    transition: transform 0.4s ease-in-out;
+    transition: max-height 0.4s ease-in-out;
+  }
 }
