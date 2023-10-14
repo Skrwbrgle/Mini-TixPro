@@ -90,13 +90,26 @@
   width: 50%;
 }
 
+.seats-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 30px;
+  justify-content: center;
+  align-items: center;
+  margin-top: 10px;
+}
+
 /* Responsive */
 @media (max-width: 768px) {
   .Card1 {
     width: 100%;
   }
-  .mobile-center {
-    justify-content: center; /* Mengatur kursi ke tengah secara horizontal */
-    text-align: center; /* Mengatur teks ke tengah */
+  .seats-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: center;
+    align-items: center;
+    margin-top: 10px;
   }
 }
