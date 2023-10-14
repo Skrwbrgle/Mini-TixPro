@@ -1,6 +1,5 @@
 import React from "react";
-import HomePage from "./HomePage";
-import ProfilePage from "./ProfilePage";
+import { HomePage, ProfilePage } from "../views";
 import { Routes, Route } from "react-router-dom";
 
 const MainContent = () => {

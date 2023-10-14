@@ -1,5 +1,5 @@
 import React from "react";
-import CardEvent from "./CardEvent";
+import CardEvent from "../components/CardEvent";
 import { Container, Stack } from "react-bootstrap";
 
 const HomePage = () => {
