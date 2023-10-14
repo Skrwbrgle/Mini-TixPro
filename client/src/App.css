@@ -1,8 +1,54 @@
 /* Card */
 .Carding {
   overflow: hidden;
+  max-height: 200px;
 }
 .Carding:hover {
   transform: scale(1.05);
+  max-height: 300px;
+  transition: transform 0.4s ease-in-out;
+  transition: max-height 0.4s ease-in-out;
+}
+
+/* Navbar */
+.nav-hover {
+  text-decoration: none;
+  position: relative;
+}
+
+.nav-hover::before {
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 2px; /* Adjust this to control the underline height */
+  bottom: 0;
+  left: 0;
+  background-color: cornflowerblue; /* Adjust this to the desired underline color */
+  transform: scaleX(0);
   transition: transform 0.3s ease-in-out;
+}
+
+.nav-hover:hover::before {
+  transform: scaleX(1);
+  transition: transform 0.3s ease-in-out;
+}
+
+.Card.Body .Button .button-assist {
+  border-radius: 30px;
+}
+
+/* Profile */
+.Card1 {
+  width: 70%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: left;
+  height: 100vh; /*Untuk mengisi tinggi layar` */
+}
+
+@media (max-width: 768px) {
+  .Card1 {
+    width: 100%;
+  }
 }

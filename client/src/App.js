@@ -1,4 +1,5 @@
 import "./App.css";
+import React from "react";
 import { MainContent, NavigateBar, Footer } from "./components";
 
 function App() {
