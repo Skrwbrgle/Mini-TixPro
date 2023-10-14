@@ -1,11 +1,12 @@
 import "./App.css";
-import { MainContent, NavigateBar } from "./components";
+import { MainContent, NavigateBar, Footer } from "./components";
 
 function App() {
   return (
     <>
       <NavigateBar></NavigateBar>
       <MainContent></MainContent>
+      <Footer></Footer>
     </>
   );
 }
