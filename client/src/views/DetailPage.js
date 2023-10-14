@@ -11,6 +11,8 @@ const DetailPage = () => {
     { id: 5, isReserved: false, isSelected: false },
     { id: 6, isReserved: false, isSelected: false },
     { id: 7, isReserved: true, isSelected: false },
+    { id: 8, isReserved: false, isSelected: false },
+    { id: 9, isReserved: false, isSelected: false },
     // Tambahkan kursi lainnya di sini
   ]);
 
@@ -32,17 +34,15 @@ const DetailPage = () => {
       <Row className="text-center my-2 mx-auto Order">
         <h1>Stage</h1>
       </Row>
-      <Row className="mobile-center">
+      <div className="seats-container">
         {seats.map((seat) => (
-          <Col key={seat.id}>
-            <Seat
-              isReserved={seat.isReserved}
-              isSelected={seat.isSelected}
-              onSelect={() => handleSeatSelect(seat.id)}
-            />
-          </Col>
+          <Seat
+            isReserved={seat.isReserved}
+            isSelected={seat.isSelected}
+            onSelect={() => handleSeatSelect(seat.id)}
+          />
         ))}
-      </Row>
+      </div>
       <Row className="text-center">
         <Col>
           <Button variant="success" size="lg" className="mt-5 order-button">
