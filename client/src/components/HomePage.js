@@ -5,7 +5,7 @@ import { Container, Stack } from "react-bootstrap";
 const HomePage = () => {
   return (
     <>
-      <Container className="my-2">
+      <Container className="mt-5">
         <Stack gap={3}>
           <CardEvent></CardEvent>
           <CardEvent></CardEvent>
