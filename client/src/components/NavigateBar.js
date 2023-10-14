@@ -15,8 +15,8 @@ function NavigateBar() {
               <Nav>
                 <Nav.Link href="/">Home</Nav.Link>
                 <Nav.Link href="/profile">Profile</Nav.Link>
-                <Nav.Link href="#">Payment</Nav.Link>
-                <Nav.Link href="#">My Ticket</Nav.Link>
+                <Nav.Link href="/detail">Detail</Nav.Link>
+                <Nav.Link href="/ticket">My Ticket</Nav.Link>
               </Nav>
             </Row>
           </Container>
