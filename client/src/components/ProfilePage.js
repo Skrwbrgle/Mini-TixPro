@@ -1,16 +1,5 @@
 import React from "react";
-import {
-  Container,
-  Col,
-  Card,
-  Image,
-  CardBody,
-  Row,
-  CardTitle,
-  ListGroup,
-  Button,
-  Stack,
-} from "react-bootstrap";
+import { Container, Card, ListGroup, Button, Stack } from "react-bootstrap";
 
 const ProfilePage = () => {
   return (
