@@ -4,7 +4,7 @@ function CardEvent() {
   return (
     <>
       <Card className="bg-dark text-white ">
-        <Card.Img src="https://picsum.photos/270/100" alt="Card image" />
+        <Card.Img src="https://picsum.photos/932/270" alt="Card image" />
         <Card.ImgOverlay>
           <Card.Title>Card title</Card.Title>
           <Card.Text>

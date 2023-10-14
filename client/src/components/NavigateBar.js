@@ -14,9 +14,9 @@ function NavigateBar() {
               // navbarScroll
               >
                 <Nav.Link href="/">Home</Nav.Link>
-                <Nav.Link href="#action2">Profile</Nav.Link>
+                <Nav.Link href="/profile">Profile</Nav.Link>
                 <Nav.Link href="#">Payment</Nav.Link>
-                <Nav.Link href="#">Booking</Nav.Link>
+                <Nav.Link href="#">My Ticket</Nav.Link>
               </Nav>
             </Row>
           </Container>
