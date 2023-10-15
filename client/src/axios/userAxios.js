@@ -45,4 +45,48 @@ const registerUser = async (data, cb) => {
   }
 };
 
-export { getUser, loginUser, registerUser };
+const editUser = async (id, data, cb) => {
+  try {
+    const res = await axios({
+      method: "PUT",
+      url: URL + `/update/${id}`,
+      data,
+    });
+    cb(res.data);
+  } catch (e) {
+    console.log(e);
+  }
+};
+
+const deleteUserByAdmin = async (id, cb) => {
+  try {
+    const res = await axios({
+      method: "DELETE",
+      url: URL + `/delete/${id}`,
+    });
+    cb(res.data);
+  } catch (e) {
+    console.log(e);
+  }
+};
+
+const deleteUserByUser = async (cb) => {
+  try {
+    const res = await axios({
+      method: "DELETE",
+      url: URL + `/delete`,
+    });
+    cb(res.data);
+  } catch (e) {
+    console.log(e);
+  }
+};
+
+export {
+  getUser,
+  loginUser,
+  registerUser,
+  editUser,
+  deleteUserByAdmin,
+  deleteUserByUser,
+};
