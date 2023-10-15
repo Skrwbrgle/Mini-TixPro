@@ -1,21 +1,26 @@
 import { Card } from "react-bootstrap";
 
-function CardEvent() {
+function CardEvent(props) {
   return (
     <>
       <Card className="Carding bg-light border-light">
         <Card.Img
           className="Card-Image"
-          src="https://via.placeholder.com/932x270"
+          src={
+            props.image === ""
+              ? "https://via.placeholder.com/932x270"
+              : props.image
+          }
         />
         <Card.ImgOverlay>
-          <Card.Title>Card title</Card.Title>
+          <Card.Title>{props.title}</Card.Title>
           <Card.Text>
-            This is a wider card with supporting text below as a natural lead-in
-            to additional content. This content is a little bit longer.
+            <p>{props.event_date}</p>
+            <p>{props.address}</p>
+            <p>{props.price}</p>
           </Card.Text>
           <Card.Link
-            href="/detail"
+            href={`/detail`}
             class="btn btn-primary text-center rounded-pill btn-book"
           >
             Booking now
