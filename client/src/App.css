@@ -10,6 +10,19 @@
   transition: max-height 0.4s ease-in-out;
 }
 
+.Carding .btn-book {
+  width: 15%;
+  padding: 5px;
+  opacity: 0;
+  transform: translateY(20px);
+}
+
+.Carding:hover .btn-book {
+  opacity: 1;
+  transform: translateY(0);
+  transition: opacity 0.5s, transform 0.3s ease-in-out;
+}
+
 /* Navbar */
 .nav-hover {
   text-decoration: none;
@@ -97,18 +110,6 @@
   justify-content: center;
   align-items: center;
   margin-top: 10px;
-}
-
-.Carding .btn-book {
-  width: 10%;
-  opacity: 0;
-  transform: translateY(20px);
-}
-
-.Carding:hover .btn-book {
-  opacity: 1;
-  transform: translateY(0);
-  transition: opacity 0.5s, transform 0.3s ease-in-out;
 }
 
 /* Ticket styling */

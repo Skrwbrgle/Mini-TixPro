@@ -26,10 +26,10 @@ function NavigateBar() {
                 // style={{ maxHeight: "100px" }}
                 // navbarScroll
               >
-                <Nav.Link href="#" className="ms-md-auto my-2">
+                <Nav.Link href="/login" className="ms-md-auto my-2">
                   Login
                 </Nav.Link>
-                <Nav.Link href="#">
+                <Nav.Link href="/register">
                   <Button variant="primary" className="rounded-pill">
                     Register
                   </Button>
