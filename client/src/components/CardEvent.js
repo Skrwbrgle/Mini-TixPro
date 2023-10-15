@@ -1,4 +1,4 @@
-import Card from "react-bootstrap/Card";
+import { Card } from "react-bootstrap";
 
 function CardEvent() {
   return (
@@ -14,7 +14,12 @@ function CardEvent() {
             This is a wider card with supporting text below as a natural lead-in
             to additional content. This content is a little bit longer.
           </Card.Text>
-          <Card.Text>Last updated 3 mins ago</Card.Text>
+          <Card.Link
+            href="/detail"
+            class="btn btn-primary text-center rounded-pill btn-book"
+          >
+            Booking now
+          </Card.Link>
         </Card.ImgOverlay>
       </Card>
     </>

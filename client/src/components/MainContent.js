@@ -1,5 +1,5 @@
 import React from "react";
-import { HomePage, ProfilePage, DetailPage } from "../views";
+import { HomePage, ProfilePage, DetailPage, BookingPage } from "../views";
 import { Routes, Route } from "react-router-dom";
 
 const MainContent = () => {
@@ -9,6 +9,7 @@ const MainContent = () => {
         <Route path="" element={<HomePage />} />
         <Route path="/profile" element={<ProfilePage />} />
         <Route path="/detail" element={<DetailPage />} />
+        <Route path="/ticket" element={<BookingPage />} />
       </Routes>
     </>
   );
