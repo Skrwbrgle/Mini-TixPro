@@ -1,11 +1,11 @@
 import axios from "axios";
 import Swal from "sweetalert2";
 
-const URL = process.env.URL_PAYMENT || "http://localhost:3000/payments";
+const URL = process.env.URL_PAYMENT || "http://localhost:3000/api/payments";
 
 const getPayments = async (cb) => {
   try {
-    const res = await axios.get({
+    const res = await axios({
       method: "GET",
       url: URL,
     });
@@ -17,7 +17,7 @@ const getPayments = async (cb) => {
 
 const getDetailPayment = async (id, cb) => {
   try {
-    const res = await axios.get({
+    const res = await axios({
       method: "GET",
       url: URL + `/${id}`,
     });
@@ -29,7 +29,7 @@ const getDetailPayment = async (id, cb) => {
 
 const addPayment = async (id, data, cb) => {
   try {
-    const res = await axios.post({
+    const res = await axios({
       method: "POST",
       url: URL + `/create/${id}`,
       data,
@@ -42,7 +42,7 @@ const addPayment = async (id, data, cb) => {
 
 const approvePayment = async (cb) => {
   try {
-    const res = await axios.put({
+    const res = await axios({
       method: "PUT",
       url: URL + "/approve",
     });

@@ -8,10 +8,11 @@ const RegisterPage = () => {
   const [password, setPassword] = useState("");
   const [identification, setIdentification] = useState(0);
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     // Tambahkan logika pendaftaran di sini
-    registerUser({ username: fullName, email, password, identification });
+    await registerUser({ username: fullName, email, password, identification });
+    window.location.href = "/";
   };
 
   return (

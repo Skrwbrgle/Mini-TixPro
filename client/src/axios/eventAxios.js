@@ -1,11 +1,15 @@
 import axios from "axios";
+import { useParams } from "react-router";
 import Swal from "sweetalert2";
+
+const idEvent = URLSearchParams;
+const accessToken = localStorage.getItem("access_token");
 
 const URL = process.env.URL_EVENT || "http://localhost:3000/api/events";
 
 const getEvents = async (cb) => {
   try {
-    const res = await axios.get({
+    const res = await axios({
       method: "GET",
       url: URL,
     });
@@ -17,10 +21,14 @@ const getEvents = async (cb) => {
 
 const getDetailEvent = async (id, cb) => {
   try {
-    const res = await axios.get({
+    const res = await axios({
       method: "GET",
-      url: URL + `/${id}`,
+      url: URL + `/${idEvent}`,
+      headers: {
+        access_token: accessToken,
+      },
     });
+
     cb(res.data);
   } catch (e) {
     console.log(e);

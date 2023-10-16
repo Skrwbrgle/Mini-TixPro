@@ -2,6 +2,16 @@ import React from "react";
 import { Button, Container, Form, Nav, Navbar, Row } from "react-bootstrap";
 
 function NavigateBar() {
+  const accessToken = localStorage.getItem("access_token");
+  const userClass = accessToken !== null ? "d-none" : "d-block";
+  const logoutBtn = accessToken !== null ? "d-block" : "d-none";
+
+  const logout = () => {
+    localStorage.clear();
+
+    window.location.href = "/";
+  };
+
   return (
     <Navbar expand="lg" className="bg-body-tertiary sticky-top">
       <Container fluid>
@@ -21,20 +31,31 @@ function NavigateBar() {
           </Container>
           <Container>
             <Row>
-              <Nav
-                className="me-auto my-lg-0"
-                // style={{ maxHeight: "100px" }}
-                // navbarScroll
-              >
-                <Nav.Link href="/login" className="ms-md-auto my-2">
-                  Login
-                </Nav.Link>
-                <Nav.Link href="/register">
-                  <Button variant="primary" className="rounded-pill">
-                    Register
-                  </Button>
-                </Nav.Link>
-              </Nav>
+              <div className={logoutBtn}>
+                <Nav className=" me-auto my-lg-0">
+                  <Nav.Link href="" className="ms-md-auto my-2">
+                    <Button
+                      onClick={logout}
+                      variant="danger"
+                      className="rounded-pill"
+                    >
+                      Logout
+                    </Button>
+                  </Nav.Link>
+                </Nav>
+              </div>
+              <div className={userClass}>
+                <Nav className=" me-auto my-lg-0">
+                  <Nav.Link href="/login" className="ms-md-auto my-2">
+                    Login
+                  </Nav.Link>
+                  <Nav.Link href="/register">
+                    <Button variant="primary" className="rounded-pill">
+                      Register
+                    </Button>
+                  </Nav.Link>
+                </Nav>
+              </div>
             </Row>
             <Row className="mt-2">
               <Nav className="justify-content-end">

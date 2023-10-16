@@ -15,7 +15,7 @@ const MainContent = () => {
       <Routes>
         <Route path="" element={<HomePage />} />
         <Route path="/profile" element={<ProfilePage />} />
-        <Route path="/detail" element={<DetailPage />} />
+        <Route path="/detail/:id" element={<DetailPage />} />
         <Route path="/ticket" element={<BookingPage />} />
         <Route path="/login" element={<LoginPage />} />
         <Route path="/register" element={<RegisterPage />} />
