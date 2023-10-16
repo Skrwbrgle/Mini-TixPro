@@ -20,6 +20,7 @@ function CardEvent(props) {
             <p>{props.price}</p>
           </Card.Text>
           <Card.Link
+            id={props.id}
             href={`/detail`}
             class="btn btn-primary text-center rounded-pill btn-book"
           >
