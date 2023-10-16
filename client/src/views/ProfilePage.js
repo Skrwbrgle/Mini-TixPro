@@ -1,7 +1,13 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Container, Card, ListGroup, Button, Stack } from "react-bootstrap";
+import { deleteUserByUser } from "../axios/userAxios";
 
 const ProfilePage = () => {
+  const [getdelete, setDelete] = useState([]);
+
+  useEffect(() => {
+    deleteUserByUser((result) => setDelete(result));
+  });
   return (
     <>
       <Container fluid className="mt-5">
@@ -14,7 +20,9 @@ const ProfilePage = () => {
               <ListGroup.Item>Vestibulum at eros</ListGroup.Item>
               <Stack gap={3} className="mt-3 py-10">
                 <Button variant="primary">Edit Account</Button>
-                <Button variant="danger">Delete Account</Button>
+                <Button href="/delete" variant="danger">
+                  Delete Account
+                </Button>
               </Stack>
             </ListGroup>
           </Card.Body>

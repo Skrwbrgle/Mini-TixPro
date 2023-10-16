@@ -25,7 +25,9 @@ function NavigateBar() {
               <Nav>
                 <Nav.Link href="/">Home</Nav.Link>
                 <Nav.Link href="/profile">Profile</Nav.Link>
-                <Nav.Link href="/ticket">My Ticket</Nav.Link>
+                <div className={logoutBtn}>
+                  <Nav.Link href="/ticket">My Ticket</Nav.Link>
+                </div>
               </Nav>
             </Row>
           </Container>

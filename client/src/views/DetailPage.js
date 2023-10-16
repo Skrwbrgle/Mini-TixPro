@@ -9,6 +9,10 @@ const DetailPage = (props) => {
   const [eventSeat, setEventSeat] = useState([]);
   const [seats, setSeats] = useState([
     { id: 1, isReserved: false, isSelected: false },
+    { id: 2, isReserved: false, isSelected: false },
+    { id: 3, isReserved: false, isSelected: false },
+    { id: 4, isReserved: true, isSelected: false },
+    { id: 5, isReserved: false, isSelected: false },
     // Tambahkan kursi lainnya di sini
   ]);
 
@@ -46,7 +50,12 @@ const DetailPage = (props) => {
       </div>
       <Row className="text-center">
         <Col>
-          <Button variant="success" size="lg" className="mt-5 order-button">
+          <Button
+            href="/ticket"
+            variant="success"
+            size="lg"
+            className="mt-5 order-button"
+          >
             Order
           </Button>
         </Col>
